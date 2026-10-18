@@ -27,3 +27,13 @@ dist-ssr
 index.single.html
 .vercel
 
+
+.vercel
+.env*
+
+media-api-raw.json
+media-url-map.tsv
+media-paths.json
+.env.local
+
+images/

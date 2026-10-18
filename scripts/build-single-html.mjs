@@ -4,7 +4,125 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(__dirname, "..", "html", "index.html");
-const BASE = "https://spacehero.in/images";
+const CDN = "https://cdn.storebox.ai";
+const MEDIA = {
+  "mobilebanner-home2.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/ec4d7e63-6538-49ce-b568-f6f0d6bd02ad/mobilebanner-home2.jpg",
+  "about-7.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/140816a3-c1cb-48a2-a62d-0bb12de4b160/about-7.png",
+  "about-24.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/f1352de8-c3d8-4779-8f71-fd20e1168ed3/about-24.png",
+  "price_table_mobile.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/c95a6288-6aba-47b2-8f5c-b7c2c3e8ba2a/price_table_mobile.png",
+  "testo4.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/51da34cd-fce6-49db-af8e-d58f8ab58508/testo4.png",
+  "about-23.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/e27d1f3b-5f47-4eb2-b672-defa5996c92e/about-23.png",
+  "Shubh-team.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/bb617811-a1f7-490f-b720-8a0daa8928c9/Shubh-team.png",
+  "partner-mob.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/5413a4d3-c1f5-473b-88b8-57f8e3a01f55/partner-mob.png",
+  "about-1.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/08c2ccfc-b5c0-44cb-a188-886d28f0dfd1/about-1.png",
+  "become-2.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/7a3a27f7-0e72-4050-bede-20370337069c/become-2.jpg",
+  "test-book.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/b3cb7299-0892-405c-8606-47f57194050f/test-book.png",
+  "partner10.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/c0307d78-3df1-4791-a4ed-541a9527aebb/partner10.jpg",
+  "media1.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/9019012a-eb50-4d10-890d-aad6d2228491/media1.jpg",
+  "about-19.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/643068a9-7836-44fd-af1d-a6a41324ae93/about-19.png",
+  "team-banner.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/187868ff-1185-43b0-8c0b-060c26913702/team-banner.png",
+  "driveme-mob.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/5daee5a7-5696-415a-afe3-8addb70a1f2c/driveme-mob.png",
+  "about-10.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/d73e7432-a23b-496f-990f-c43328a13a3c/about-10.png",
+  "cars.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/6a873e0d-b3bc-4d68-afec-1f346fb35ed7/cars.png",
+  "partner6.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/fb314d96-ae54-4d2a-ac61-bcc84a2ce7e4/partner6.jpg",
+  "bookdriver.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/cb8beee2-0abb-4175-9223-b068c0d264b2/bookdriver.png",
+  "abut-up.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/529a90b4-170c-4cbf-8c96-9626f9324205/abut-up.png",
+  "partner3.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/2cd5a878-44d8-4d76-9bf1-d1b6f45578d2/partner3.jpg",
+  "media5.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/5fe141d5-7cbc-4bb6-8823-0d82a938a1a9/media5.jpg",
+  "mon-dailydrivers.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/2debe243-5481-473a-bd5f-a9bdd065967f/mon-dailydrivers.png",
+  "satya.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/67b0af28-f379-48b1-a474-e9906e5b8ddc/satya.png",
+  "about-5.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/66b7722a-cdc5-4515-95f4-f4bdeea619be/about-5.png",
+  "partner7.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/3e579254-30fb-4c98-a10c-304e832b895b/partner7.jpg",
+  "become-3.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/8bfb1b2b-03f2-4592-930f-c0611a2e447c/become-3.jpg",
+  "testo2.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/665c22bf-dc3e-4eba-917f-d2647779dcd4/testo2.png",
+  "about-18.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/858cc99a-f4ca-4760-9e3b-c1cac60e407f/about-18.png",
+  "mon-nightdriver.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/d2ab517b-7b00-4729-8473-e14c0cfea654/mon-nightdriver.png",
+  "verfiy-driver.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/f3ee04e4-a187-4af9-b47f-f2e04d65e563/verfiy-driver.png",
+  "payment.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/a414d15b-be90-4df9-95e4-2432b8987369/payment.png",
+  "about-6.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/9068835b-efee-46f0-8eb4-3b62192806db/about-6.png",
+  "partner8.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/0424d990-1d5a-473a-a109-aaafb50ed1ae/partner8.jpg",
+  "cp-icon.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/c7f73d56-7fce-4c4c-95de-a3cecf056749/cp-icon.png",
+  "customize.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/14674f89-66aa-4369-a514-86fa8c78e4b9/customize.png",
+  "aboutus-mob.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/3d4d86cc-d283-4386-a9a6-2b4bcba8c4e1/aboutus-mob.png",
+  "rajnish-kumar.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/c49add11-a72c-4de3-982c-f9ae734006c1/rajnish-kumar.jpg",
+  "media3.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/5c7fa848-1d2c-4feb-9a13-1f9b7e483c54/media3.jpg",
+  "valet.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/cee218b7-8d3d-4e92-b9c8-93b1711a5a75/valet.png",
+  "partner4.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/9f191f33-aa65-4050-a799-449f1065351d/partner4.jpg",
+  "hireevents.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/a97c1851-9e5e-417b-890e-2a402bcc5230/hireevents.png",
+  "about-12.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/e37c54ad-9346-403a-b018-db025ee1cda3/about-12.png",
+  "partner1.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/568179c7-9803-432b-8b19-74ee58cb04ff/partner1.jpg",
+  "media2.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/9941939f-e208-46a2-85a4-157b78f87561/media2.jpg",
+  "tracking.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/5faabdea-2be8-4af3-9110-59b32b096d01/tracking.png",
+  "about-banner.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/cf5644fd-95b6-4fe3-bca8-23e2d968c3d4/about-banner.png",
+  "mon-temporarydrivers.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/37ee8190-df78-4755-b875-dbe4d8a04a2b/mon-temporarydrivers.png",
+  "mobilebanner-home.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/fd4db94e-230d-4638-9339-ddba63ff7dee/mobilebanner-home.jpg",
+  "partner5.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/99b54f6a-8a4c-4545-906a-eb36b29baed1/partner5.jpg",
+  "about-9.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/c67ac6ed-bdba-4872-9f8f-f0cbc351a797/about-9.png",
+  "montly-pageicon.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/bf3dae57-6269-478a-b2ba-e41764cb2e08/montly-pageicon.png",
+  "valetservices.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/553f4960-b8be-44aa-885b-a276c34fb889/valetservices.png",
+  "anjali.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/29f28a50-c021-4754-a447-199e9297c885/anjali.png",
+  "become-partner-banner.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/89e77ac1-aea0-4af8-8e60-deb8efb6e924/become-partner-banner.png",
+  "favicon.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/d158bcae-656d-474e-b398-2ad14102bcb2/favicon.png",
+  "price_table_desktop.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/6c833f2d-684b-4478-a813-e455c9e97998/price_table_desktop.png",
+  "about-8.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/de105a0c-83ee-4019-982b-939d1b85ded6/about-8.png",
+  "team-mob.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/b4e1256d-a2d9-453a-8b8f-82e25fc5919b/team-mob.png",
+  "about-22.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/e72ac89d-1e8e-49d2-9d8e-9356ff3a37c1/about-22.png",
+  "testo3.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/33137b04-5445-4cf9-ac56-c36db196e567/testo3.png",
+  "media4.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/856437ab-7e41-4e2a-8b67-9e373ef682d1/media4.jpg",
+  "mall-icon.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/d3b6faeb-a05b-43e0-86bf-cad09f72e040/mall-icon.png",
+  "partner11.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/7fd06ae4-39c1-4cad-a5ac-77e3fdff7039/partner11.jpg",
+  "restaurant-icon.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/5533294a-482b-4f5f-9901-a7050772ed27/restaurant-icon.png",
+  "testo1.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/37ac744a-16aa-419d-b454-5df4b2252519/testo1.png",
+  "partner9.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/23de4b00-f7b6-4afb-aa7f-4ddf79705bb8/partner9.jpg",
+  "about-13.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/dca69f82-d644-44bc-b0d4-18bdbd52137a/about-13.png",
+  "banquets_gym-icon.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/91691aa0-2661-4ea6-8b24-cb233187cb13/banquets_gym-icon.png",
+  "mon-hourlydrivers.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/696a49e2-05df-4b29-9bcc-0fb9c3049652/mon-hourlydrivers.png",
+  "test-valet.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/373bdddd-a5a2-4210-84c9-af97bfd97304/test-valet.png",
+  "app-download-buttons.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/0e6ae084-6c87-41a8-a9ba-0adb1c34b40f/app-download-buttons.png",
+  "drive-me-banner.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/02ca66a6-a1b5-4a7d-b333-d3811e16fa86/drive-me-banner.png",
+  "logo.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/5a64d018-066e-4fed-99e8-0755f7b81ead/logo.png",
+  "partner12.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/d3c34c86-9e32-4cdc-94d0-e8dee01fd91e/partner12.jpg",
+  "Spacehero-logo-color.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/c51dacf3-1d1c-4a9f-b9f7-e80820fdccaa/Spacehero-logo-color.jpg",
+  "praksh.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/0ace82bc-b472-4ba7-90dc-513cb6f694a9/praksh.png",
+  "whatsapp.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/8993a2aa-a860-4804-a7d5-fce5313f649c/whatsapp.png",
+  "become-1.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/ed1dd197-9c91-42c1-a724-f6c2de05edec/become-1.jpg",
+  "about-14.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/77dd65ef-d0a8-46bf-bad0-512fe7e4d855/about-14.png",
+  "mon-outstationdrivers.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/93584368-c9ba-4ed3-9386-49b15d29d967/mon-outstationdrivers.png",
+  "verified.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/96f76ba6-ff91-4f72-88a3-63551c45ba22/verified.png",
+  "market-icon.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/9e92d2b0-12e0-4447-87f6-c9e9cc8953d1/market-icon.png",
+  "test-park.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/2368ad68-f14b-4be5-acab-222d2128d75b/test-park.png",
+  "about-17.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/a73b347c-19e1-4657-a96e-d4bf052c5afe/about-17.png",
+  "test-drive.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/c912ab77-2831-472e-a44b-3bae7ebbac72/test-drive.png",
+  "about-2.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/a4fb95b0-c46c-4c50-96f0-6aeaa3bbe602/about-2.png",
+  "darban.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/ee6df86a-5c2d-43b7-8b9d-e740c5769d55/darban.jpg",
+  "goggle-play.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/c73f33d1-8b88-4de5-91b1-677056aa3c47/goggle-play.png",
+  "support.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/f0cf9dc4-21b3-483c-b75a-2e3957d1fb89/support.png",
+  "become-4.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/4cecc43a-9d14-437d-b39b-29b885da2933/become-4.jpg",
+  "about-20.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/5219813c-449e-4abc-8150-a188eb5f5390/about-20.png",
+  "about-16.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/20c0b60b-355a-4968-8eb5-ab79e3d19adf/about-16.png",
+  "sc1.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/2d79f468-1e16-493e-8415-0a42e7bbbf67/sc1.png",
+  "about-15.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/76d8b36a-5a6d-465c-a691-30a317c4d983/about-15.png",
+  "about-11.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/a777beec-1f1f-4eb0-ba4e-4284957a9757/about-11.png",
+  "valet-mob.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/cbccec75-9cba-46a8-9571-fb384be49565/valet-mob.png",
+  "velet-banner.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/da3dffb2-fd17-4a40-b0ec-63af3e88490e/velet-banner.png",
+  "about-21.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/e54df0f1-94e5-4d66-9b69-79b3fff14bad/about-21.png",
+  "gulshan.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/a6f9aa1b-bf25-4ef2-b40e-0d4e619fc481/gulshan.png",
+  "partner2.jpg": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/3bfffd65-b137-4e87-973d-21eef6ef22cd/partner2.jpg",
+  "mock2.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/997c75e8-dfb0-4da6-8d4e-2c0f324e1bb8/mock2.png",
+  "sagar.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/a40f6322-0ece-43ac-8ce2-7ea8fc1f7caa/sagar.png",
+  "contact-mobile-banner.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/db020e12-80fc-43a2-b196-cb33f6f8ff75/contact-mobile-banner.png",
+  "ayush.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/a7206967-229d-4804-b31c-61f1db76bacd/ayush.png",
+  "ck.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/f917c7d3-02db-4f1b-8ec9-02940943ffaf/ck.png",
+  "banquets-icon.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/8c9aa4dd-ea4b-4bd6-b05c-54b589200157/banquets-icon.png",
+  "contact-banner.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/42f16d9c-9c48-427c-9b91-35f0e6f33cd7/contact-banner.png",
+  "goggle-apple.png": "/media/43b826c4-1167-4d31-bff6-f095103d5f3a/b02c976f-0604-40b7-a105-11c8d8abbe21/goggle-apple.png"
+};
+const media = (file) => {
+  const p = MEDIA[file];
+  if (!p) throw new Error("Missing Storebox media: " + file);
+  return CDN + p;
+};
+const BASE = CDN; // kept for any leftover refs
 const BOOK = "https://driveme.spacehero.in/login";
 const WA = "https://wa.me/916387485211";
 const CALL = "tel:+916387485211";
@@ -103,16 +221,18 @@ img{max-width:100%;display:block}a{color:inherit;text-decoration:none}button,inp
 .stat .num .suf{color:var(--amber)}.stat .lbl{margin-top:6px;font-size:12px;color:var(--muted)}
 @media(min-width:640px){.stat .lbl{font-size:13px}}
 .bento{display:grid;gap:12px}@media(min-width:768px){.bento{gap:16px}.bento-2{grid-template-columns:1fr 1fr}}
-@media(min-width:1024px){.bento-services{grid-template-columns:repeat(12,1fr)}.bento-services .c1{grid-column:span 7}.bento-services .c2{grid-column:span 5}.bento-services .c3{grid-column:span 5}.bento-services .c4{grid-column:span 7}}
-.service-card{display:block;min-height:280px;color:inherit;cursor:pointer}
-.service-card .inner{position:relative;height:100%;min-height:280px;padding:24px;display:flex;flex-direction:column;justify-content:flex-end}
-.service-card .bg{position:absolute;inset:0}.service-card .bg img{width:100%;height:100%;object-fit:cover;opacity:.4;transition:transform .4s}
-.service-card:hover .bg img{transform:scale(1.05)}
-.service-card .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(12,12,14,.95),rgba(12,12,14,.55),rgba(12,12,14,.25))}
-.service-card .badge{display:inline-block;margin-bottom:12px;padding:4px 10px;border-radius:8px;font-size:12px;font-weight:600;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);color:var(--amber);opacity:0;transform:translateY(6px);transition:.4s}
-.service-card:hover .badge{opacity:1;transform:none}
-.service-card.blue .badge{border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1);color:var(--blue)}
-.service-card h3{margin:0;font-size:24px;position:relative}.service-card p{margin:12px 0 0;color:var(--muted);font-size:14px;max-width:36ch;position:relative}
+@media(min-width:768px){.bento-services{grid-template-columns:1fr 1fr;gap:20px}}
+.service-card{display:block;min-height:280px;color:inherit;cursor:pointer;height:100%}
+@media(min-width:1024px){.service-card{min-height:320px}}
+.service-card .inner{position:relative;height:100%;min-height:inherit;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+@media(min-width:1024px){.service-card .inner{padding:28px}}
+.service-card .bg{position:absolute;inset:0}.service-card .bg img{width:100%;height:100%;object-fit:cover;opacity:.55;transition:transform .4s,opacity .4s}
+.service-card:hover .bg img{transform:scale(1.05);opacity:.65}
+.service-card .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#070708,rgba(7,7,8,.75),rgba(7,7,8,.2))}
+.service-card .badge{display:inline-block;width:fit-content;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(245,158,11,.35);background:rgba(245,158,11,.1);color:var(--amber)}
+.service-card.blue .badge{border-color:rgba(59,130,246,.35);background:rgba(59,130,246,.1);color:var(--blue)}
+.service-card h3{margin:0;font-size:clamp(1.35rem,2vw,1.75rem);position:relative;letter-spacing:-.02em}
+.service-card p{margin:0;color:var(--muted);font-size:14px;max-width:36ch;position:relative;line-height:1.55}
 /* Mobile card-stack scroll (sticky) — transform only on inner shell to avoid sticky bugs */
 @media(max-width:767px){
   .bento-services{display:block;padding-bottom:24px}
@@ -320,11 +440,11 @@ const locations = [
 ];
 
 const locCard = ([n, d, i]) =>
-  `<div class="liquid-glass loc-card"><div class="glow"></div><img src="${BASE}/${i}" alt="${n}"/><p class="d">${d}</p><h3>${n}</h3></div>`;
+  `<div class="liquid-glass loc-card"><div class="glow"></div><img src="${media(i)}" alt="${n}"/><p class="d">${d}</p><h3>${n}</h3></div>`;
 
 const gallery = [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
-  .map((n) => `${BASE}/about-${n}.png`);
-gallery.push(`${BASE}/sc1.png`);
+  .map((n) => `${media(`about-${n}.png`)}`);
+gallery.push(media("sc1.png"));
 
 const team = [
   ["Shubh Singh", "Founder & CEO", "Shubh-team.png", "Shubh Singh, the dynamic founder of Spacehero, leads the organization with a visionary approach. Steering both operations and strategy, Shubh's hands-on management ensures a seamless experience for clients, from valet services to event hires. His leadership not only drives the team but also sets a new standard in customer service."],
@@ -546,7 +666,7 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SpaceHero | Valet Parking & Professional Driver Hire — Delhi-NCR</title>
 <meta name="description" content="Valet Parking Services and Professional Driver Hire in Noida, Ghaziabad, Delhi - SpaceHero"/>
-<link rel="icon" href="${BASE}/favicon.png"/>
+<link rel="icon" href="${media("favicon.png")}"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet"/>
@@ -556,7 +676,7 @@ const html = `<!DOCTYPE html>
 
 <header class="nav glass">
   <div class="container nav-inner">
-    <a class="brand" href="#home" data-route="home"><img src="${BASE}/logo.png" alt="SpaceHero"/><span>SpaceHero</span></a>
+    <a class="brand" href="#home" data-route="home"><img src="${media("logo.png")}" alt="SpaceHero"/><span>SpaceHero</span></a>
     <nav class="nav-links">
       <a href="#home" data-route="home">Home</a>
       <a href="#about" data-route="about">About Us</a>
@@ -601,7 +721,7 @@ const html = `<!DOCTYPE html>
     <div class="hero-atm"></div>
     <div class="hero-grid-fx"></div>
     <div class="hero-art" data-hero-visual>
-      <img src="${BASE}/cars.png" alt=""/>
+      <img src="${media("cars.png")}" alt=""/>
       <div class="fade-l"></div><div class="fade-b"></div><div class="fade-t"></div>
     </div>
     <div class="hero-stage">
@@ -620,7 +740,7 @@ const html = `<!DOCTYPE html>
     <div class="hero-rail" aria-hidden="true"></div>
   </div>
   <div class="hero-mob">
-    <div class="hero-mobile-banner"><img src="${BASE}/mobilebanner-home2.jpg" alt=""/><div class="shade"></div></div>
+    <div class="hero-mobile-banner"><img src="${media("mobilebanner-home2.jpg")}" alt=""/><div class="shade"></div></div>
     <div class="hero-mob-inner">
       <p class="hero-brand">Space<span class="accent">Hero</span></p>
       <h1>Roam the city in the comfort of your car.</h1>
@@ -636,7 +756,7 @@ const html = `<!DOCTYPE html>
 <section class="section" id="about-home">
   <div class="container">
     <div class="about-grid">
-      <div class="about-media"><img src="${BASE}/abut-up.png" alt="home about image"/></div>
+      <div class="about-media"><img src="${media("abut-up.png")}" alt="home about image"/></div>
       <div>
         <div class="section-head"><p class="label">Who we are</p><h2>About Us</h2></div>
         <div class="prose">
@@ -659,16 +779,16 @@ const html = `<!DOCTYPE html>
     <div class="section-head"><p class="label">What we do</p><h2>Services we Offer</h2><p>Four pillars of urban mobility and hospitality across Delhi-NCR.</p></div>
     <div class="bento bento-services" id="services-stack">
       <div class="service-stack-item">
-        <a class="service-stack-shell liquid-glass service-card c1" href="#valet" data-route="valet"><div class="glow"></div><div class="inner"><div class="bg"><img src="${BASE}/valetservices.png" alt="Valet Services"/></div><span class="badge">Valet Services</span><h3>Valet Services</h3><p>Experience premier convenience with our valet services, ensuring a seamless arrival and departure at any venue, epitomizing parking sophistication.</p></div></a>
+        <a class="service-stack-shell liquid-glass service-card" href="#valet" data-route="valet"><div class="glow"></div><div class="inner"><div class="bg"><img src="${media("valetservices.png")}" alt="Valet Services"/></div><span class="badge">Service</span><h3>Valet Services</h3><p>Experience premier convenience with our valet services, ensuring a seamless arrival and departure at any venue, epitomizing parking sophistication.</p></div></a>
       </div>
       <div class="service-stack-item">
-        <a class="service-stack-shell liquid-glass service-card blue c2" href="#drive-me" data-route="drive-me"><div class="glow"></div><div class="inner"><div class="bg"><img src="${BASE}/bookdriver.png" alt="Drive Me"/></div><span class="badge">Drive Me</span><h3>Drive Me</h3><p>Opt for flexibility with our hourly driver hire, providing you with professional driving services tailored to your schedule and needs.</p></div></a>
+        <a class="service-stack-shell liquid-glass service-card blue" href="#drive-me" data-route="drive-me"><div class="glow"></div><div class="inner"><div class="bg"><img src="${media("bookdriver.png")}" alt="Drive Me"/></div><span class="badge">Service</span><h3>Drive Me</h3><p>Opt for flexibility with our hourly driver hire, providing you with professional driving services tailored to your schedule and needs.</p></div></a>
       </div>
       <div class="service-stack-item">
-        <a class="service-stack-shell liquid-glass service-card c3" href="#home"><div class="glow"></div><div class="inner"><div class="bg"><img src="${BASE}/darban.jpg" alt="Hire us for Event"/></div><span class="badge">Hire us for Event</span><h3>Hire us for Event</h3><p>Elevate your event's prestige with our professional doorman services, offering guests a warm welcome and top-tier security with elegance.</p></div></a>
+        <a class="service-stack-shell liquid-glass service-card" href="#home"><div class="glow"></div><div class="inner"><div class="bg"><img src="${media("darban.jpg")}" alt="Hire us for Event"/></div><span class="badge">Service</span><h3>Hire us for Event</h3><p>Elevate your event's prestige with our professional doorman services, offering guests a warm welcome and top-tier security with elegance.</p></div></a>
       </div>
       <div class="service-stack-item">
-        <a class="service-stack-shell liquid-glass service-card blue c4" href="#monthly-driver" data-route="monthly-driver"><div class="glow"></div><div class="inner"><div class="bg"><img src="${BASE}/hireevents.png" alt="Monthly Driver"/></div><span class="badge">Monthly Driver</span><h3>Monthly Driver</h3><p>Secure unparalleled reliability by booking a driver for a month, guaranteeing consistent, high-quality driving services for your daily commutes.</p></div></a>
+        <a class="service-stack-shell liquid-glass service-card blue" href="#monthly-driver" data-route="monthly-driver"><div class="glow"></div><div class="inner"><div class="bg"><img src="${media("hireevents.png")}" alt="Monthly Driver"/></div><span class="badge">Service</span><h3>Monthly Driver</h3><p>Secure unparalleled reliability by booking a driver for a month, guaranteeing consistent, high-quality driving services for your daily commutes.</p></div></a>
       </div>
     </div>
   </div>
@@ -682,7 +802,7 @@ const html = `<!DOCTYPE html>
       ${steps.map(([n, t, b, img]) => `
         <div class="step-stack-item">
           <article class="step-stack-shell liquid-glass step"><div class="glow"></div>
-            <img src="${BASE}/${img}" alt="${t}"/><p class="n">${n}</p><h3>${t}</h3><p>${b}</p>
+            <img src="${media(img)}" alt="${t}"/><p class="n">${n}</p><h3>${t}</h3><p>${b}</p>
           </article>
         </div>`).join("")}
     </div>
@@ -692,7 +812,7 @@ const html = `<!DOCTYPE html>
 <section class="section" id="commitment">
   <div class="container">
     <div class="section-head"><p class="label">Why SpaceHero</p><h2>Our Commitment</h2></div>
-    <div class="commit-grid">${commitments.map(([t, img, b]) => `<div class="liquid-glass card"><div class="glow"></div><img src="${BASE}/${img}" alt="${t}"/><h3>${t}</h3><p>${b}</p></div>`).join("")}</div>
+    <div class="commit-grid">${commitments.map(([t, img, b]) => `<div class="liquid-glass card"><div class="glow"></div><img src="${media(img)}" alt="${t}"/><h3>${t}</h3><p>${b}</p></div>`).join("")}</div>
   </div>
 </section>
 
@@ -719,17 +839,17 @@ ${booking("home")}
       <p class="label" style="color:var(--blue)">Mobile</p>
       <h2 style="font-size:clamp(1.75rem,4vw,2.5rem);letter-spacing:-.03em;margin:12px 0 0">Download the App</h2>
       <p class="muted" style="margin-top:16px">Streamline your car ownership experience with the SpaceHero app, available for iOS and Android. Easily track all your bookings and enjoy a seamless journey.</p>
-      <div class="store"><img src="${BASE}/goggle-play.png" alt="Google Play"/><img src="${BASE}/goggle-apple.png" alt="App Store"/></div>
-      <img src="${BASE}/app-download-buttons.png" alt="coming soon" style="margin-top:24px;max-width:280px;opacity:.9"/>
+      <div class="store"><img src="${media("goggle-play.png")}" alt="Google Play"/><img src="${media("goggle-apple.png")}" alt="App Store"/></div>
+      <img src="${media("app-download-buttons.png")}" alt="coming soon" style="margin-top:24px;max-width:280px;opacity:.9"/>
     </div>
-    <div><img src="${BASE}/mock2.png" alt="mobile space hero images" style="max-width:360px;margin:0 auto"/></div>
+    <div><img src="${media("mock2.png")}" alt="mobile space hero images" style="max-width:360px;margin:0 auto"/></div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="section-head"><p class="label">In the press</p><h2>Media</h2></div>
-    <div class="snap">${[1, 2, 3, 4, 5].map((n) => `<div class="gallery-item"><img src="${BASE}/media${n}.jpg" alt="media ${n}" style="aspect-ratio:16/10"/></div>`).join("")}</div>
+    <div class="snap">${[1, 2, 3, 4, 5].map((n) => `<div class="gallery-item"><img src="${media(`media${n}.jpg`)}" alt="media ${n}" style="aspect-ratio:16/10"/></div>`).join("")}</div>
   </div>
 </section>
 
@@ -742,7 +862,7 @@ ${booking("home")}
         ["Kasana", "testo2.png", "Using SpaceHero for event parking was a game-changer. Their professional doormen and efficient valet service made our event feel even more special and well-organized."],
         ["Sumit", "testo3.png", "I've been booking monthly drivers through SpaceHero for my hectic schedule, and it's been a lifesaver. The drivers are punctual, courteous, and highly skilled."],
         ["Amit", "testo4.png", "Hiring a driver on an hourly basis through SpaceHero has made my errands and meetings around the city so much easier. Exceptional service and reliability!"],
-      ].map(([n, i, q]) => `<div class="liquid-glass testi"><div class="glow"></div><div class="inner"><div class="who"><img src="${BASE}/${i}" alt="${n}"/><h3>${n}</h3></div><p>${q}</p></div></div>`).join("")}
+      ].map(([n, i, q]) => `<div class="liquid-glass testi"><div class="glow"></div><div class="inner"><div class="who"><img src="${media(i)}" alt="${n}"/><h3>${n}</h3></div><p>${q}</p></div></div>`).join("")}
     </div>
   </div>
 </section>
@@ -750,14 +870,14 @@ ${booking("home")}
 <section class="section" style="border-block:1px solid var(--border);background:rgba(12,12,14,.3)">
   <div class="container">
     <div class="section-head" style="text-align:center;margin-left:auto;margin-right:auto"><h2>Our Partners</h2></div>
-    <div class="partners">${Array.from({ length: 12 }, (_, i) => `<div class="partner"><img src="${BASE}/partner${i + 1}.jpg" alt="partner${i + 1}"/></div>`).join("")}</div>
+    <div class="partners">${Array.from({ length: 12 }, (_, i) => `<div class="partner"><img src="${media(`partner${i + 1}.jpg`)}" alt="partner${i + 1}"/></div>`).join("")}</div>
   </div>
 </section>
 </div>
 
 <!-- ===================== ABOUT ===================== -->
 <div class="page" data-page="about">
-  ${banner("About Us", `${BASE}/about-banner.png`, `${BASE}/aboutus-mob.png`, "about banner")}
+  ${banner("About Us", `${media("about-banner.png")}`, `${media("aboutus-mob.png")}`, "about banner")}
   <section class="section"><div class="container">
     <div class="prose"><p>Spacehero stands as a pioneering solution to one of the most pressing urban challenges faced by major cities across the country: parking. With our innovative approach, we have disrupted the market by offering an array of services designed to address the needs of vehicle owners, event organizers, and business establishments alike. Our services include:</p></div>
     <div class="bento bento-2" style="margin-top:32px">
@@ -775,20 +895,20 @@ ${booking("home")}
   </div></section>
   <section class="section" style="border-top:1px solid var(--border)"><div class="container">
     <div class="section-head"><h2>Our Commitment</h2></div>
-    <div class="commit-grid">${commitments.map(([t, img, b]) => `<div class="liquid-glass card"><div class="glow"></div><img src="${BASE}/${img}" alt="${t}"/><h3>${t}</h3><p>${b}</p></div>`).join("")}</div>
+    <div class="commit-grid">${commitments.map(([t, img, b]) => `<div class="liquid-glass card"><div class="glow"></div><img src="${media(img)}" alt="${t}"/><h3>${t}</h3><p>${b}</p></div>`).join("")}</div>
   </div></section>
 </div>
 
 <!-- ===================== VALET ===================== -->
 <div class="page" data-page="valet">
-  ${banner("The Ultimate Valet Service", `${BASE}/velet-banner.png`, `${BASE}/valet-mob.png`, "valet banner")}
+  ${banner("The Ultimate Valet Service", `${media("velet-banner.png")}`, `${media("valet-mob.png")}`, "valet banner")}
   <section class="section"><div class="container">
     <div class="prose" style="max-width:800px">
       <p>Spacehero, with over five years in the valet parking sector, stands at the forefront, championing a service ethos that places the guest first — ensuring their safety, comfort, and peace of mind. Our rigorous selection and training processes guarantee our valets meet the highest standards, boasting impeccable driving records. Valet services elevate the guest experience, introducing a touch of luxury and immediate hospitality. For hotels, it signifies an unwavering commitment to guest satisfaction, ensuring all needs are met with grace. In shopping centers, it becomes essential, offering ease of access to those facing mobility challenges, allowing them to prioritize their wellbeing over the inconvenience of finding parking.</p>
       <p>By replacing the nuisances of self-parking with a warm, professional welcome, we transform the arrival experience. Our service is marked by a commitment to hospitality, where guests are warmly greeted, their vehicles are securely parked, and they're directed onwards with a friendly smile.</p>
       <p>Our valet services are designed to add a layer of convenience, elegance, and accessibility right to your doorstep.</p>
     </div>
-    <img src="${BASE}/valet.png" alt="Valet" style="margin-top:32px;border-radius:16px;border:1px solid var(--border);max-width:480px"/>
+    <img src="${media("valet.png")}" alt="Valet" style="margin-top:32px;border-radius:16px;border:1px solid var(--border);max-width:480px"/>
   </div></section>
   <section class="section" style="border-block:1px solid var(--border);background:rgba(12,12,14,.4)"><div class="container">
     <div class="section-head"><p class="label">Valet Services</p><h2>4-Step Smart Valet</h2><p>Experience true smart parking with Valet service. Whether you need short-term or long-term parking, Pre-book your spot and enjoy a seamless and contactless parking experience.</p></div>
@@ -797,7 +917,7 @@ ${booking("home")}
       ${steps.map(([n, t, b, img]) => `
         <div class="step-stack-item">
           <article class="step-stack-shell liquid-glass step"><div class="glow"></div>
-            <img src="${BASE}/${img}" alt="${t}"/><p class="n">${n}</p><h3>${t}</h3><p>${b}</p>
+            <img src="${media(img)}" alt="${t}"/><p class="n">${n}</p><h3>${t}</h3><p>${b}</p>
           </article>
         </div>`).join("")}
     </div>
@@ -818,7 +938,7 @@ ${booking("home")}
 
 <!-- ===================== DRIVE ME ===================== -->
 <div class="page" data-page="drive-me">
-  ${banner("Doorstep Driver Services", `${BASE}/drive-me-banner.png`, `${BASE}/driveme-mob.png`, "drive me")}
+  ${banner("Doorstep Driver Services", `${media("drive-me-banner.png")}`, `${media("driveme-mob.png")}`, "drive me")}
   <section class="section"><div class="container">
     <div class="prose" style="max-width:800px">
       <p>SpaceHero revolutionizes transportation convenience by providing doorstep driver services, offering a seamless solution for various driving needs. With a simple phone call, SpaceHero brings professional drivers directly to your doorstep, ensuring effortless access to reliable transportation. Whether you're heading out for shopping, attending an official meeting, enjoying leisure time with friends, or returning safely after a late-night party, SpaceHero's driver service is available at your convenience.</p>
@@ -847,7 +967,7 @@ ${booking("home")}
 
 <!-- ===================== MONTHLY ===================== -->
 <div class="page" data-page="monthly-driver">
-  ${banner("Hire permanent drivers on monthly basis", `${BASE}/about-banner.png`, `${BASE}/aboutus-mob.png`, "monthly")}
+  ${banner("Hire permanent drivers on monthly basis", `${media("about-banner.png")}`, `${media("aboutus-mob.png")}`, "monthly")}
   <section class="section"><div class="container">
     <div class="prose" style="max-width:800px">
       <p>At SpaceHero, we provide professional driver services, offering experienced drivers to ensure a stress-free journey for our clients. Each driver undergoes rigorous security training, is fully referenced, and is dedicated to ensuring every aspect of the chauffeured experience runs seamlessly. Our monthly driver service is ideal for individuals with busy schedules or those who prefer not to drive.</p>
@@ -872,11 +992,11 @@ ${booking("home")}
         ["Temporary Drivers", "mon-temporarydrivers.png", "To cover for unavailable regular drivers or during periods of high demand, they are hired for a short duration to offer flexibility and support when there is a shortage of workforce."],
         ["Night Drivers", "mon-nightdriver.png", "To cover for unavailable regular drivers or during periods of high demand, they are hired for a short duration to offer flexibility and support when there is a shortage of workforce."],
         ["Permanent Drivers", "montly-pageicon.png", "Permanent drivers work for individuals, families, or organisations on a long-term basis. They manage the client's pick-up and drop-off preferences, schedules, and so on."],
-      ].map(([t, img, b]) => `<div class="liquid-glass"><div class="glow"></div><img src="${BASE}/${img}" alt="${t}" style="width:100%;aspect-ratio:16/10;object-fit:cover"/><div style="padding:24px"><h3 style="margin:0;font-size:18px">${t}</h3><p class="muted" style="margin:12px 0 0;font-size:14px">${b}</p></div></div>`).join("")}
+      ].map(([t, img, b]) => `<div class="liquid-glass"><div class="glow"></div><img src="${media(img)}" alt="${t}" style="width:100%;aspect-ratio:16/10;object-fit:cover"/><div style="padding:24px"><h3 style="margin:0;font-size:18px">${t}</h3><p class="muted" style="margin:12px 0 0;font-size:14px">${b}</p></div></div>`).join("")}
     </div>
     <div style="margin-top:32px;border-radius:16px;border:1px solid var(--border);overflow:hidden">
-      <img class="price-desk" src="${BASE}/price_table_desktop.png" alt="Price table"/>
-      <img class="price-mob" src="${BASE}/price_table_mobile.png" alt="Price table mobile"/>
+      <img class="price-desk" src="${media("price_table_desktop.png")}" alt="Price table"/>
+      <img class="price-mob" src="${media("price_table_mobile.png")}" alt="Price table mobile"/>
     </div>
   </div></section>
   ${booking("monthly")}
@@ -884,18 +1004,18 @@ ${booking("home")}
 
 <!-- ===================== TEAM ===================== -->
 <div class="page" data-page="team">
-  ${banner("Leadership Team", `${BASE}/team-banner.png`, `${BASE}/team-mob.png`, "team")}
+  ${banner("Leadership Team", `${media("team-banner.png")}`, `${media("team-mob.png")}`, "team")}
   <section class="section"><div class="container">
     <div class="section-head"><h2>The people behind SpaceHero</h2><p>Operations, strategy, compliance, workforce, and technology — united for Delhi-NCR mobility.</p></div>
     <div class="team-grid">
-      ${team.map(([name, role, img, bio]) => `<div class="liquid-glass team-card"><div class="glow"></div><div class="pic"><img src="${BASE}/${img}" alt="${name}"/></div><div class="body"><h3>${name}</h3><p class="role">${role}</p><p>${bio}</p></div></div>`).join("")}
+      ${team.map(([name, role, img, bio]) => `<div class="liquid-glass team-card"><div class="glow"></div><div class="pic"><img src="${media(img)}" alt="${name}"/></div><div class="body"><h3>${name}</h3><p class="role">${role}</p><p>${bio}</p></div></div>`).join("")}
     </div>
   </div></section>
 </div>
 
 <!-- ===================== CONTACT ===================== -->
 <div class="page" data-page="contact">
-  ${banner("Contact Us", `${BASE}/contact-banner.png`, `${BASE}/contact-mobile-banner.png`, "contact")}
+  ${banner("Contact Us", `${media("contact-banner.png")}`, `${media("contact-mobile-banner.png")}`, "contact")}
   <section class="section"><div class="container">
     <div class="contact-cards">
       <a href="${EMAIL}"><div class="ico">✉</div><p class="dim" style="margin:0;font-size:14px">Email</p><p style="margin:4px 0 0;font-weight:600">${MAIL}</p></a>
@@ -908,7 +1028,7 @@ ${booking("home")}
 
 <!-- ===================== DRIVER PARTNER ===================== -->
 <div class="page" data-page="driver-partner">
-  ${banner("Become a driver partner with Welcome", `${BASE}/become-partner-banner.png`, `${BASE}/partner-mob.png`, "partner")}
+  ${banner("Become a driver partner with Welcome", `${media("become-partner-banner.png")}`, `${media("partner-mob.png")}`, "partner")}
   <section class="section"><div class="container">
     <p class="muted" style="max-width:640px;font-size:18px">Grow your business by offering private airport pickups to travellers</p>
     <div class="section-head" style="margin-top:32px"><h2>Why become a Partner?</h2></div>
@@ -918,7 +1038,7 @@ ${booking("home")}
         ["You'll have access to our Partner Network", "become-2.jpg", "Use our network of over 1,500 hotels and 800 vacation rental companies to expand your offering."],
         ["You'll get paid weekly", "become-3.jpg", "We pay our drivers every week, so you won't have to wait around for your money."],
         ["Join our Mission", "become-4.jpg", "Our goal is to change the way people travel by making the beginning and end of every trip as enjoyable as the middle."],
-      ].map(([t, img, b]) => `<div class="liquid-glass"><div class="glow"></div><img src="${BASE}/${img}" alt="${t}" style="width:100%;aspect-ratio:16/10;object-fit:cover"/><div style="padding:24px"><h3 style="margin:0;font-size:18px">${t}</h3><p class="muted" style="margin:12px 0 0;font-size:14px">${b}</p></div></div>`).join("")}
+      ].map(([t, img, b]) => `<div class="liquid-glass"><div class="glow"></div><img src="${media(img)}" alt="${t}" style="width:100%;aspect-ratio:16/10;object-fit:cover"/><div style="padding:24px"><h3 style="margin:0;font-size:18px">${t}</h3><p class="muted" style="margin:12px 0 0;font-size:14px">${b}</p></div></div>`).join("")}
     </div>
   </div></section>
   ${booking("partner")}
@@ -929,7 +1049,7 @@ ${booking("home")}
 <footer class="footer">
   <div class="footer-grid">
     <div>
-      <a class="brand" href="#home" data-route="home"><img src="${BASE}/logo.png" alt="SpaceHero"/><span>SpaceHero</span></a>
+      <a class="brand" href="#home" data-route="home"><img src="${media("logo.png")}" alt="SpaceHero"/><span>SpaceHero</span></a>
       <p class="muted" style="margin-top:16px;font-size:14px">Delhi-NCR's premier Valet Parking, Event Doorman (Darbar), and Professional Driver Hire platform.</p>
     </div>
     <div>
@@ -959,7 +1079,7 @@ ${booking("home")}
         <li class="muted" style="font-size:14px">For business enquiries :<br/>Indirapuram, Ghaziabad 201014.</li>
       </ul>
       <a href="${WA}" target="_blank" rel="noreferrer" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;color:var(--emerald);font-size:14px">
-        <img src="${BASE}/whatsapp.png" alt="whatsapp" style="width:20px;height:20px"/> WhatsApp Us
+        <img src="${media("whatsapp.png")}" alt="whatsapp" style="width:20px;height:20px"/> WhatsApp Us
       </a>
     </div>
   </div>
@@ -1002,7 +1122,7 @@ Open \`index.html\` in any browser. All pages live inside one file via hash rout
 - \`#contact\`
 - \`#driver-partner\`
 
-CSS and JS are fully embedded. Images load from https://spacehero.in/images/
+CSS and JS are fully embedded. Images load from https://cdn.storebox.ai/media/
 
 Regenerate: \`node scripts/build-single-html.mjs\`
 `,

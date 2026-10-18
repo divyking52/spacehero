@@ -11,6 +11,6 @@ Open `index.html` in any browser. All pages live inside one file via hash routes
 - `#contact`
 - `#driver-partner`
 
-CSS and JS are fully embedded. Images load from https://spacehero.in/images/
+CSS and JS are fully embedded. Images load from https://cdn.storebox.ai/media/
 
 Regenerate: `node scripts/build-single-html.mjs`

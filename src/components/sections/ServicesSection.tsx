@@ -5,13 +5,6 @@ import { services } from "../../data/content";
 import { GlowCard } from "../ui/GlowCard";
 import { SectionHeading } from "../ui/SectionHeading";
 
-const colClass = [
-  "lg:col-span-7",
-  "lg:col-span-5",
-  "lg:col-span-5",
-  "lg:col-span-7",
-] as const;
-
 export function ServicesSection() {
   const stackRef = useRef<HTMLDivElement>(null);
 
@@ -82,15 +75,52 @@ export function ServicesSection() {
           description="Four pillars of urban mobility and hospitality across Delhi-NCR."
         />
 
-        <div
-          ref={stackRef}
-          className="services-stack flex flex-col gap-0 md:grid md:gap-4 md:grid-cols-2 lg:grid-cols-12 lg:gap-5"
-        >
+        {/* Desktop: clean 2×2 grid */}
+        <div className="hidden gap-4 md:grid md:grid-cols-2 lg:gap-5">
+          {services.map((service) => (
+            <Link key={service.id} to={service.href} className="block h-full">
+              <GlowCard glow={service.accent} className="h-full">
+                <div className="relative flex h-full min-h-[280px] flex-col overflow-hidden lg:min-h-[320px]">
+                  <div className="absolute inset-0">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="h-full w-full object-cover opacity-55 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 group-hover:opacity-65"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/75 to-canvas/20" />
+                  </div>
+
+                  <div className="relative z-10 mt-auto flex flex-col gap-2 p-6 lg:p-7">
+                    <span
+                      className={`w-fit rounded-md border px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${
+                        service.accent === "amber"
+                          ? "border-amber/35 bg-amber/10 text-amber"
+                          : "border-blue/35 bg-blue/10 text-blue"
+                      }`}
+                    >
+                      Service
+                    </span>
+                    <h3 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-text lg:text-[1.75rem]">
+                      {service.title}
+                      <ArrowUpRight className="h-5 w-5 shrink-0 text-dim transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-text" />
+                    </h3>
+                    <p className="max-w-md text-sm leading-relaxed text-muted lg:text-[0.95rem]">
+                      {service.summary}
+                    </p>
+                  </div>
+                </div>
+              </GlowCard>
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile: sticky card stack */}
+        <div ref={stackRef} className="services-stack flex flex-col md:hidden">
           {services.map((service, i) => (
             <div
               key={service.id}
               data-stack-item
-              className="services-stack-item md:contents"
+              className="services-stack-item"
               style={
                 {
                   ["--stack-z"]: i + 1,
@@ -98,42 +128,27 @@ export function ServicesSection() {
                 } as CSSProperties
               }
             >
-              <div
-                data-stack-shell
-                className="services-stack-shell md:contents md:h-full"
-              >
-                <Link
-                  to={service.href}
-                  className={`block h-full ${colClass[i]}`}
-                >
+              <div data-stack-shell className="services-stack-shell">
+                <Link to={service.href} className="block">
                   <GlowCard
                     glow={service.accent}
-                    className="h-full min-h-[min(58vh,440px)] md:min-h-[260px] lg:min-h-[300px]"
+                    className="min-h-[min(58vh,440px)]"
                   >
-                    <div className="relative flex h-full min-h-[min(58vh,440px)] flex-col overflow-hidden p-4 md:min-h-[260px] md:p-5 lg:min-h-[300px] lg:p-6">
+                    <div className="relative flex min-h-[min(58vh,440px)] flex-col overflow-hidden p-4">
                       <div className="absolute inset-0">
                         <img
                           src={service.image}
                           alt={service.title}
-                          className="h-full w-full object-cover opacity-40 transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                          className="h-full w-full object-cover opacity-45"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/30" />
                       </div>
                       <div className="relative z-10 mt-auto">
-                        <span
-                          className={`mb-3 inline-flex rounded-lg border px-2.5 py-1 text-xs font-semibold md:translate-y-2 md:opacity-0 md:transition-all md:duration-[400ms] md:group-hover:translate-y-0 md:group-hover:opacity-100 ${
-                            service.accent === "amber"
-                              ? "border-amber/40 bg-amber/10 text-amber"
-                              : "border-blue/40 bg-blue/10 text-blue"
-                          }`}
-                        >
-                          {service.title}
-                        </span>
                         <h3 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-text">
                           {service.title}
-                          <ArrowUpRight className="h-5 w-5 text-dim transition group-hover:text-text" />
+                          <ArrowUpRight className="h-5 w-5 text-dim" />
                         </h3>
-                        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted md:text-base">
+                        <p className="mt-3 text-sm leading-relaxed text-muted">
                           {service.summary}
                         </p>
                       </div>
